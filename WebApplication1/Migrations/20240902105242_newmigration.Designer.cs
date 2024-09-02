@@ -12,8 +12,8 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20240830055518_intialCreate")]
-    partial class intialCreate
+    [Migration("20240902105242_newmigration")]
+    partial class newmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

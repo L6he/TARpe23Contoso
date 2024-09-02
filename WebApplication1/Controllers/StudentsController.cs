@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -12,7 +13,11 @@ namespace WebApplication1.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Students.ToListAsync());
+        }
+        /*public async Task<IActionResult> Index
             (
             string sortOrder,
             string currentFilter,
@@ -21,7 +26,7 @@ namespace WebApplication1.Controllers
             )
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParam"] = String.IsNullOrEmpty(sortOrder)? "name_desc" : "";
+            ViewData["NameSortParam"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["DateSortParam"] = sortOrder == "Date" ? "date_desc" : "Date";
             if (searchString != null)
             {
@@ -36,8 +41,8 @@ namespace WebApplication1.Controllers
                            select student;
             if (!String.IsNullOrEmpty(searchString))
             {
-                students = students.Where(student 
-                => student.LastName.Contains(searchString) 
+                students = students.Where(student
+                => student.LastName.Contains(searchString)
                 || student.FirstMidName.Contains(searchString));
             }
             switch (sortOrder)
@@ -60,6 +65,25 @@ namespace WebApplication1.Controllers
             }
             int pageSize = 3;
             return View(await _context.Students.ToListAsync());
+        } */
+
+        [HttpGet]
+        public IActionResult Create() 
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ID, LastName, FirstMidName, EnrollmentDate")] Student student)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Students.Add(student);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(student);
         }
     }
 }
