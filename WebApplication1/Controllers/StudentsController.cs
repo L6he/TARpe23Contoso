@@ -114,6 +114,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //DETAISLSSLLSSLSLSLSLSLSSLLSLSLSSLSLSLSLSLSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -125,6 +126,18 @@ namespace WebApplication1.Controllers
             if (student == null)
             {
                 return NotFound();
+            }
+            return View(student);
+        }
+
+        //EDIT!!!!!!!!!!
+        public async Task<IActionResult> Edit([Bind("ID, LastName, FirstMidName, EnrollmentDate")] Student student)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Students.Update(student);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
             return View(student);
         }
