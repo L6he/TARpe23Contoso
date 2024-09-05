@@ -85,5 +85,33 @@ namespace WebApplication1.Controllers
             }
             return View(student);
         }
+        //V delete GET method, otsib andmebaasist
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) 
+            {
+                return NotFound();
+            }
+            var student = await _context.Students.FirstOrDefaultAsync(m => m.ID == id);
+
+            if (student == null)
+            {
+                return NotFound();   
+            }
+            return View(student);
+        }
+
+        //delete POST method, toestab muudatusi
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var student = await _context.Students.FindAsync(id);
+
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
