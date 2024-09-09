@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Fyh0dbf2WRyCFrouviotnVTQq6fPcgycmh4Q6im285t8tSeU6KhegQ8VNrdU6tWEBSRogLssLnUNIlVQy/GW+Q==",
+  "dgSpecHash": "YxXiFGu2fG8qj/yv0Zg+tVo3r9A+F7zU/jEmbyW5u/h9zFGaH7blsY3DEJziq5/IB2AwYpB4jvNOB368uVW94A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\opilane\\Source\\Repos\\TARpe23Contoso\\WebApplication1\\WebApplication1.csproj",
+  "projectFilePath": "C:\\Users\\opilane\\source\\repos\\TARpe23Contoso\\WebApplication1\\WebApplication1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\opilane\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\opilane\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

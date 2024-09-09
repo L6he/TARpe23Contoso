@@ -101,7 +101,7 @@ namespace WebApplication1.Controllers
             return View(student);
         }
 
-        //delete POST method, toestab muudatusi
+        //delete POST method, teostab muudatusi
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -141,5 +141,11 @@ namespace WebApplication1.Controllers
             }
             return View(student);
         }
+
+        //clown
+        /*public async Task<IActionResult> Clone()
+        {
+            
+        }*/
     }
 }
