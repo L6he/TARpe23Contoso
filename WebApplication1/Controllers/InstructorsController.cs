@@ -5,10 +5,10 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class InstructorController : Controller 
+    public class InstructorsController : Controller 
     {
         private readonly SchoolContext _context;
-        public InstructorController(SchoolContext context)
+        public InstructorsController(SchoolContext context)
         {
             _context = context;
         }
