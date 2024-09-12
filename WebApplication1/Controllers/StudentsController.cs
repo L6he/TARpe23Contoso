@@ -142,7 +142,7 @@ namespace WebApplication1.Controllers
             return View(student);
         }
 
-        //clown
+        //clown 
         public async Task<IActionResult> Clone(int? id)
         {
             if (id == null)
@@ -151,13 +151,25 @@ namespace WebApplication1.Controllers
             }
             var student = await _context.Students.FirstOrDefaultAsync(m => m.ID == id);
 
+            var cloneStudent = new Student
+            {
+                FirstMidName = student.FirstMidName,
+                LastName = student.LastName,
+                EnrollmentDate = student.EnrollmentDate
+            };
+
             if (student == null)
             {
                 return NotFound();
             }
-            _context.Students.Add(student);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+
+            if (cloneStudent != null)
+            {
+                _context.Students.Add(cloneStudent);
+                await _context.SaveChangesAsync();
+            }
+            
+            return RedirectToAction("Index"); //no way it finally works
+        } 
     }
 }
