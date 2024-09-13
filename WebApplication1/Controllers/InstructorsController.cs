@@ -51,9 +51,9 @@ namespace WebApplication1.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Instructor instructor, string selectedCourses)
+        public async Task<IActionResult> Create(Instructor instructor/*, string selectedCourses*/)
         {
-            if (selectedCourses == null)
+            /*if (selectedCourses == null)
             {
                 instructor.CourseAssignments = new List<CourseAssignments>();
                 foreach (var course in selectedCourses)
@@ -65,14 +65,16 @@ namespace WebApplication1.Controllers
                     };
                     instructor.CourseAssignments.Add(courseToAdd);
                 }
-            }
+            }*/
+            //ModelState.Remove(selectedCourses);
+            
             if (ModelState.IsValid)
             {
                 _context.Add(instructor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            PopulateAssignedCourseData(instructor); //updates courses near instructor
+            //PopulateAssignedCourseData(instructor); //updates courses near instructor
             return View(instructor);
         }
         

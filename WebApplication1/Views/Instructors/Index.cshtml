@@ -15,8 +15,9 @@
             <th>Hire Date</th>
             <th>Office Location</th>
             <th>Courses</th>
-            <th>Credits</th>
-            <th></th>
+            <th>Social Credits</th>
+            <th>Next Paycheck</th>
+            <th>Corpses Resurrected</th>
         </tr>
     </thead>
     <tbody>
@@ -44,6 +45,8 @@
                     }
                 </td>
                 <td>@Html.DisplayFor(modelItem => item.SocialCredits)</td>
+                <td>@Html.DisplayFor(modelItem => item.NextPaycheck)</td>
+                <td>@Html.DisplayFor(modelItem => item.CorpsesResurrected)</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-outline-secondary">Details</a>
                     <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-info">Edit</a>

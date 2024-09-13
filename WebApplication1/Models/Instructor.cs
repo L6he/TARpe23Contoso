@@ -24,7 +24,7 @@ namespace WebApplication1.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Hired on: ")]
         public DateTime HireDate { get; set; }
-        public ICollection<CourseAssignments> CourseAssignments { get; set; }
+        public ICollection<CourseAssignments>? CourseAssignments { get; set; }
         
         public OfficeAssignment? OfficeAssignment { get; set; }
 
