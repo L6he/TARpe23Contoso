@@ -2,9 +2,9 @@
 @{
     ViewData["Title"] = "Instructors";
 }
-<h2>Instructors</h2>
+<h1>Instructors</h1>
 <p>
-    <a asp-action="Create">Add New Instructor</a>
+    <a asp-action="Create" class="btn btn-primary">Add New</a>
 </p>
 
 <table class="table">
@@ -45,10 +45,10 @@
                 </td>
                 <td>@Html.DisplayFor(modelItem => item.SocialCredits)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                    <a asp-action="Clone" asp-route-id="@item.ID">Clone</a>
+                    <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-outline-secondary">Details</a>
+                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-info">Edit</a>
+                    <a asp-action="Clone" asp-route-id="@item.ID" class="btn btn-secondary">Duplicate</a>
+                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
