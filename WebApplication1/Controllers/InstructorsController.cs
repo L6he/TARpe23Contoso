@@ -135,6 +135,39 @@ namespace WebApplication1.Controllers
             }
             return View(instructor);
         }
+
+        //"Clone"
+        public async Task<IActionResult> Clone(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.ID == id);
+
+            var duplicateInstructor = new Instructor
+            {
+                FirstMidName = instructor.FirstMidName,
+                LastName = instructor.LastName,
+                HireDate = instructor.HireDate,
+                SocialCredits = instructor.SocialCredits,
+                NextPaycheck = instructor.NextPaycheck,
+                CorpsesResurrected = instructor.CorpsesResurrected
+            };
+
+            if (instructor == null)
+            {
+                return NotFound();
+            }
+
+            if (duplicateInstructor != null)
+            {
+                _context.Instructors.Add(duplicateInstructor);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
 
