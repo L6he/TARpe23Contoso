@@ -13,8 +13,8 @@
             <th>Last Name</th>
             <th>First Name</th>
             <th>Hire Date</th>
-            <th>Office Location</th>
-            <th>Courses</th>
+            @* <th>Courses</th> *@
+            @* <th>Office Location</th> *@
             <th>Social Credits</th>
             <th>Next Paycheck</th>
             <th>Corpses Resurrected</th>
@@ -32,18 +32,18 @@
                 <td>@Html.DisplayFor(modelItem => item.LastName)</td>
                 <td>@Html.DisplayFor(modelItem => item.FirstMidName)</td>
                 <td>@Html.DisplayFor(modelItem => item.HireDate)</td>
-                <td>
+                @* <td>
                     @if (item.OfficeAssignment != null)
                     {
                         @item.OfficeAssignment.Location
                     }
-                </td>
-                <td>
+                </td> *@
+                @* <td>
                     @foreach (var courses in item.CourseAssignments)
                     {
                         @courses.Course.CourseID @: @courses.Course.Title <br>
                     }
-                </td>
+                </td> *@
                 <td>@Html.DisplayFor(modelItem => item.SocialCredits)</td>
                 <td>@Html.DisplayFor(modelItem => item.NextPaycheck)</td>
                 <td>@Html.DisplayFor(modelItem => item.CorpsesResurrected)</td>

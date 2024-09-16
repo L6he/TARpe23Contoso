@@ -1,18 +1,18 @@
 ﻿@model WebApplication1.Models.Instructor
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Add new</h1>
+<h1>Edit info</h1>
 
-<h4>Instructor</h4>
-
+<h4>New instructor info</h4>
 <hr />
 
 <div class="row">
-    <div class="col-md-8">
-        <form asp-action="Create">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="ID" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="LastName" class="control-label"></label>
@@ -28,7 +28,7 @@
                 <label asp-for="HireDate" class="control-label"></label>
                 <input asp-for="HireDate" class="form-control" />
                 <span asp-validation-for="HireDate" class="text-danger"></span>
-            </div> 
+            </div>
             @* <div class="form-group">
                 <label asp-for="OfficeAssignment.Location" class="control-label"></label>
                 <input asp-for="OfficeAssignment.Location" class="form-control" />
@@ -49,40 +49,9 @@
                 <input asp-for="CorpsesResurrected" class="form-control" />
                 <span asp-validation-for="CorpsesResurrected" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <table>
-                        <tr>
-                            @{
-                                int count = 0;
-                                List<WebApplication1.Models.AssignedCourseData> assignedCourses = ViewBag.Courses;
-
-                                foreach (var course in assignedCourses)
-                                {
-                                    if (count++ % 3 == 0)
-                                    {
-                                        @:</tr><tr>
-                                    }
-                                    @:<td>
-                                    <input
-                                        type ="checkbox"
-                                        name="selectedCourses"
-                                        value="@course.CourseID"
-                                        @(Html.Raw(course.Assigned ? "checked=\"checked\"":""))
-                                    />
-                                }
-                            }
-                        </tr>
-                    </table>
-                </div>
-            </div>*@
             <div class="form-group">
-                <input type="submit" value="Add" class="btn btn-primary" />
+                <input type="submit" value="Make changes" class="btn btn-info" /> | <a asp-action="Index" class="btn btn-outline-secondary">Return to list</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index" class="btn btn-outline-secondary">Return to list</a>
 </div>

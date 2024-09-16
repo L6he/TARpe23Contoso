@@ -123,6 +123,18 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        //Edit
+        public async Task<IActionResult> Edit([Bind("ID, LastName, FirstMidName, HireDate, OfficeAssignment.Location, SocialCredits, NextPaycheck, CorpsesResurrected")] Instructor instructor)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Instructors.Update(instructor);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(instructor);
+        }
     }
 }
 
