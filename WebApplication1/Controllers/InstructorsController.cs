@@ -93,7 +93,36 @@ namespace WebApplication1.Controllers
                 });
             }
             ViewData["Courses"] = viewModel;
-        } 
+        }
+
+        //Delete
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.ID == id);
+
+            if (instructor == null)
+            {
+                return NotFound();
+            }
+            return View(instructor);
+        }
+
+        //delete POST method, teostab muudatusi
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var instructor = await _context.Instructors.FindAsync(id);
+
+            _context.Instructors.Remove(instructor);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
 
