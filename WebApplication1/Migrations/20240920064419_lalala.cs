@@ -5,7 +5,7 @@
 namespace WebApplication1.Migrations
 {
     /// <inheritdoc />
-    public partial class instructorscourseoffice : Migration
+    public partial class lalala : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
