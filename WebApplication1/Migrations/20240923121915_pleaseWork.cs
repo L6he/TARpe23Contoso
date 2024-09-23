@@ -6,24 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebApplication1.Migrations
 {
     /// <inheritdoc />
-    public partial class doItNOWagain : Migration
+    public partial class pleaseWork : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Course",
-                columns: table => new
-                {
-                    CourseID = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Credits = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Course", x => x.CourseID);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Instructors",
                 columns: table => new
@@ -58,6 +45,67 @@ namespace WebApplication1.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Departments",
+                columns: table => new
+                {
+                    DepartmentID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Budget = table.Column<decimal>(type: "Money", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalMoneyLaundered = table.Column<decimal>(type: "Money", nullable: false),
+                    TotalBodyCount = table.Column<int>(type: "int", nullable: false),
+                    InstructorID = table.Column<int>(type: "int", nullable: true),
+                    RowVersion = table.Column<byte>(type: "tinyint", rowVersion: true, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Departments", x => x.DepartmentID);
+                    table.ForeignKey(
+                        name: "FK_Departments_Instructors_InstructorID",
+                        column: x => x.InstructorID,
+                        principalTable: "Instructors",
+                        principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OfficeAssignments",
+                columns: table => new
+                {
+                    InstructorID = table.Column<int>(type: "int", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OfficeAssignments", x => x.InstructorID);
+                    table.ForeignKey(
+                        name: "FK_OfficeAssignments_Instructors_InstructorID",
+                        column: x => x.InstructorID,
+                        principalTable: "Instructors",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Course",
+                columns: table => new
+                {
+                    CourseID = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Credits = table.Column<int>(type: "int", nullable: false),
+                    DepartmentID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Course", x => x.CourseID);
+                    table.ForeignKey(
+                        name: "FK_Course_Departments_DepartmentID",
+                        column: x => x.DepartmentID,
+                        principalTable: "Departments",
+                        principalColumn: "DepartmentID");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CourseAssignments",
                 columns: table => new
                 {
@@ -77,24 +125,6 @@ namespace WebApplication1.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CourseAssignments_Instructors_InstructorID",
-                        column: x => x.InstructorID,
-                        principalTable: "Instructors",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OfficeAssignments",
-                columns: table => new
-                {
-                    InstructorID = table.Column<int>(type: "int", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OfficeAssignments", x => x.InstructorID);
-                    table.ForeignKey(
-                        name: "FK_OfficeAssignments_Instructors_InstructorID",
                         column: x => x.InstructorID,
                         principalTable: "Instructors",
                         principalColumn: "ID",
@@ -129,6 +159,11 @@ namespace WebApplication1.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Course_DepartmentID",
+                table: "Course",
+                column: "DepartmentID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CourseAssignments_CourseID",
                 table: "CourseAssignments",
                 column: "CourseID");
@@ -136,6 +171,11 @@ namespace WebApplication1.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_CourseAssignments_InstructorID",
                 table: "CourseAssignments",
+                column: "InstructorID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Departments_InstructorID",
+                table: "Departments",
                 column: "InstructorID");
 
             migrationBuilder.CreateIndex(
@@ -166,6 +206,9 @@ namespace WebApplication1.Migrations
 
             migrationBuilder.DropTable(
                 name: "Student");
+
+            migrationBuilder.DropTable(
+                name: "Departments");
 
             migrationBuilder.DropTable(
                 name: "Instructors");

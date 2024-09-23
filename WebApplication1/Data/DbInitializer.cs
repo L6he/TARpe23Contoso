@@ -80,6 +80,39 @@ namespace WebApplication1.Data
                 new Instructor { FirstMidName = "John Dark", LastName = "Souls", HireDate = DateTime.Parse("1817-06-20"), SocialCredits = -5000000 },
                 new Instructor { FirstMidName = "Joseph", LastName = "Joestar", HireDate = DateTime.Parse("2057-06-20"), SocialCredits = -5000000 }
                 };
+            context.Instructors.AddRange(instructors);
+            context.SaveChanges();
+
+            if (context.Departments.Any()) { return; }
+            var departments = new Department[]
+            {
+                new Department
+                {
+                    Name = "Retardism",
+                    Budget = 200,
+                    StartDate = DateTime.Parse("2001-03-03"),
+                    TotalMoneyLaundered = 500,
+                    TotalBodyCount = 24,
+                },
+                new Department
+                {
+                    Name = "Theoretical Physics",
+                    Budget = 5000000000,
+                    StartDate = DateTime.Parse("1998-11-18"),
+                    TotalMoneyLaundered = 0,
+                    TotalBodyCount = 800000000
+                },
+                new Department
+                {
+                    Name = "Honey mustardless burgering",
+                    Budget = 1,
+                    StartDate = DateTime.Parse("2022-03-04"),
+                    TotalMoneyLaundered = 0,
+                    TotalBodyCount = 0
+                }
+            }; 
+            context.Departments.AddRange(departments);
+            context.SaveChanges();
             /*
             //objekt õpilastega, mis lisatakse siis, kui õpilasi sisestatud ei ole
             var students = new Student[]

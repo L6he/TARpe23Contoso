@@ -30,11 +30,16 @@ namespace WebApplication1.Migrations
                     b.Property<int>("Credits")
                         .HasColumnType("int");
 
+                    b.Property<int?>("DepartmentID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CourseID");
+
+                    b.HasIndex("DepartmentID");
 
                     b.ToTable("Course", (string)null);
                 });
@@ -60,6 +65,46 @@ namespace WebApplication1.Migrations
                     b.HasIndex("InstructorID");
 
                     b.ToTable("CourseAssignments", (string)null);
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Department", b =>
+                {
+                    b.Property<int>("DepartmentID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DepartmentID"));
+
+                    b.Property<decimal>("Budget")
+                        .HasColumnType("Money");
+
+                    b.Property<int?>("InstructorID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<byte?>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TotalBodyCount")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalMoneyLaundered")
+                        .HasColumnType("Money");
+
+                    b.HasKey("DepartmentID");
+
+                    b.HasIndex("InstructorID");
+
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Enrollment", b =>
@@ -163,6 +208,13 @@ namespace WebApplication1.Migrations
                     b.ToTable("Student", (string)null);
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.Course", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Department", null)
+                        .WithMany("Courses")
+                        .HasForeignKey("DepartmentID");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.CourseAssignments", b =>
                 {
                     b.HasOne("WebApplication1.Models.Course", "Course")
@@ -180,6 +232,15 @@ namespace WebApplication1.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("Instructor");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Department", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Instructor", "Administrator")
+                        .WithMany()
+                        .HasForeignKey("InstructorID");
+
+                    b.Navigation("Administrator");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Enrollment", b =>
@@ -215,6 +276,11 @@ namespace WebApplication1.Migrations
             modelBuilder.Entity("WebApplication1.Models.Course", b =>
                 {
                     b.Navigation("Enrollments");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Department", b =>
+                {
+                    b.Navigation("Courses");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Instructor", b =>

@@ -13,6 +13,7 @@ namespace WebApplication1.Data
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<OfficeAssignment> OfficeAssignments { get; set; }
         public DbSet<CourseAssignments> CourseAssignments { get; set; }
+        public DbSet<Department> Departments { get; set; }
         //public DbSet<AssignedCourseData> AssignedCourseDatas { get; set; }
 
 
@@ -24,6 +25,7 @@ namespace WebApplication1.Data
             modelBuilder.Entity<Instructor>().ToTable("Instructors");
             modelBuilder.Entity<OfficeAssignment>().ToTable("OfficeAssignments");
             modelBuilder.Entity<CourseAssignments>().ToTable("CourseAssignments");
+            modelBuilder.Entity<Department>().ToTable("Departments");
             //modelBuilder.Entity<AssignedCourseData>().ToTable("AssignedCourseData");
             /*modelBuilder.Entity<Course>().ToTable("Course");
             modelBuilder.Entity<Enrollment>().ToTable("Enrollment");
