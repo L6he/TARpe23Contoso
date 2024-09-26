@@ -135,7 +135,6 @@ C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\We
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\WebApplication1.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\WebApplication1.RazorAssemblyInfo.cache
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\WebApplication1.RazorAssemblyInfo.cs
-C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\WebApplication1.sourcelink.json
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\staticwebassets.build.json
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\staticwebassets.development.json
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\staticwebassets\msbuild.WebApplication1.Microsoft.AspNetCore.StaticWebAssets.props
@@ -146,9 +145,9 @@ C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\st
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\scopedcss\bundle\WebApplication1.styles.css
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\scopedcss\projectbundle\WebApplication1.bundle.scp.css
-C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\WebAppli.7D14BD69.Up2Date
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\WebApplication1.dll
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\refint\WebApplication1.dll
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\WebApplication1.pdb
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\WebApplication1.genruntimeconfig.cache
 C:\Users\opilane\source\repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\ref\WebApplication1.dll
+C:\Users\opilane\Source\Repos\TARpe23Contoso\WebApplication1\obj\Debug\net7.0\WebApplication1.csproj.CopyComplete

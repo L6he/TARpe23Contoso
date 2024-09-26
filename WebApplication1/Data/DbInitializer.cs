@@ -47,7 +47,7 @@ namespace WebApplication1.Data
             context.Courses.AddRange(courses);
             context.SaveChanges();
 
-            if (context.Enrollments.Any())
+            /*if (context.Enrollments.Any())
             {
                 return;
             }
@@ -63,7 +63,7 @@ namespace WebApplication1.Data
                 new Enrollment {StudentID=8, CourseID=0, Grade=Grade.C},
             };
             context.Enrollments.AddRange(enrollments);
-            context.SaveChanges();
+            context.SaveChanges();*/
 
             if (context.Instructors.Any() )
             {

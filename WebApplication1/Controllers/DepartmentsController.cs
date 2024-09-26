@@ -17,5 +17,25 @@ namespace WebApplication1.Controllers
             var SchoolContext = _context.Departments.Include(x => x.Administrator);
             return View(await SchoolContext.ToListAsync());
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            if (id == null) 
+            { 
+                return NotFound();
+            }
+
+            string query = "SELECT * FROM Departments WHERE DepartmentID = {0}";
+            var department = await _context.Departments.FromSqlRaw(query, id)
+                .Include(d => d.Administrator)
+                .AsNoTracking().FirstOrDefaultAsync();
+
+            if (department == null) 
+            {
+                return NotFound();
+            }
+
+            return View(department);
+        }
     }
 }

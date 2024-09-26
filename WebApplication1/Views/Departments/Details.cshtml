@@ -1,0 +1,68 @@
+﻿@model WebApplication1.Models.Department
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Department details</h4>
+
+        <hr>
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Budget)
+            </dt>
+
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Budget)
+            </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalMoneyLaundered)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalMoneyLaundered)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalBodyCount)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalBodyCount)
+        </dd>
+
+        <dt>
+            @{
+                if(Model.Administrator.FullName != null)
+                {
+                    @Html.DisplayNameFor(model => model.Administrator.FullName)
+                    @Html.DisplayFor(model => model.Administrator.FullName)
+                }
+            }
+        </dt>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-outline-secondary">Return to list</a>
+</div>
