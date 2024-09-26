@@ -16,7 +16,7 @@
             <th> @Html.DisplayNameFor(model => model.Budget)</th>
             <th> @Html.DisplayNameFor(model => model.StartDate)</th>
             <th> @Html.DisplayNameFor(model => model.RowVersion)</th>
-            <th>Available actions:</th>
+            <th>Available actions: </th>
         </tr>
     </thead>
 
@@ -24,13 +24,13 @@
         @foreach (var department in Model)
         {
             <tr>
-                <td> @Html.DisplayNameFor(modelItem => department.Name)</td>
-                <td> @Html.DisplayNameFor(modelItem => department.Administrator.FullName)</td>
-                <td> @Html.DisplayNameFor(modelItem => department.TotalMoneyLaundered)</td>
-                <td> @Html.DisplayNameFor(modelItem => department.TotalBodyCount)</td>
-                <td> @Html.DisplayNameFor(modelItem => department.Budget)</td>
-                <td> @Html.DisplayNameFor(modelItem => department.StartDate)</td>
-                <td> @Html.DisplayNameFor(modelItem => department.RowVersion)</td>
+                <td> @Html.DisplayFor(modelItem => department.Name)</td>
+                <td> @Html.DisplayFor(modelItem => department.Administrator.FullName)</td>
+                <td> @Html.DisplayFor(modelItem => department.TotalMoneyLaundered)</td>
+                <td> @Html.DisplayFor(modelItem => department.TotalBodyCount)</td>
+                <td> @Html.DisplayFor(modelItem => department.Budget)</td>
+                <td> @Html.DisplayFor(modelItem => department.StartDate)</td>
+                <td> @Html.DisplayFor(modelItem => department.RowVersion)</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@department.DepartmentID" class="btn btn-outline-secondary">Details</a>
                     <a asp-action="Edit" asp-route-id="@department.DepartmentID" class="btn btn-info">Edit</a>

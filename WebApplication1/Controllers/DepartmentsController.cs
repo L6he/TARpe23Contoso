@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using WebApplication1.Data;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -35,6 +39,26 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
+            return View(department);
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FullName");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Name,Budget,StartDate,TotalMoneyLaundered,TotalBodyCount,InstructorID,RowVersion")] Department department)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(department);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FullName", department.InstructorID);
             return View(department);
         }
     }
