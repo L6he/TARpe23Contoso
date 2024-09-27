@@ -61,5 +61,35 @@ namespace WebApplication1.Controllers
             ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FullName", department.InstructorID);
             return View(department);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var depaato = await _context.Departments.FirstOrDefaultAsync(x => x.DepartmentID == id);
+
+            if (depaato == null) 
+            {
+                return NotFound();
+            }
+            return View(depaato);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var depaato = await _context.Departments.FindAsync(id);
+            
+            _context.Departments.Remove(depaato);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
     }
 }
