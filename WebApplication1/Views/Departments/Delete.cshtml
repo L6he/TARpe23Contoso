@@ -47,16 +47,6 @@
             <dt class="col-sm-10">
                 @Html.DisplayFor(model => model.TotalBodyCount)
         </dt>
-
-        <dt>
-            @{
-                if (Model.Administrator.FullName != null)
-                {
-                    @Html.DisplayNameFor(model => model.Administrator.FullName)
-                    @Html.DisplayFor(model => model.Administrator.FullName)
-                }
-            }
-        </dt>
     </dl>
 
     <form asp-action="Delete">
