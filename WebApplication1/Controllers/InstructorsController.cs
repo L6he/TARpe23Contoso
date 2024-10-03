@@ -124,8 +124,26 @@ namespace WebApplication1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //Edit
-        public async Task<IActionResult> Edit([Bind("ID, LastName, FirstMidName, HireDate, OfficeAssignment.Location, SocialCredits, NextPaycheck, CorpsesResurrected")] Instructor instructor)
+        //EDIT GET!!!!!!!!!!
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.ID == id);
+
+            if (instructor == null)
+            {
+                return NotFound();
+            }
+            return View();
+        }
+        //𝓯𝓻𝓮𝓪𝓴𝔂 EDIT!!
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Instructor instructor)
         {
             if (ModelState.IsValid)
             {

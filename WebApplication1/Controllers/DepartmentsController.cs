@@ -91,5 +91,35 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("Index");
         }
+
+        //Edit GET
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var depaato = await _context.Departments.FirstOrDefaultAsync(m => m.DepartmentID == id);
+
+            if (depaato == null)
+            {
+                return NotFound();
+            }
+            return View();
+        }
+        //𝓯𝓻𝓮𝓪𝓴𝔂 edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit([Bind("Name,Budget,StartDate,TotalMoneyLaundered,TotalBodyCount,InstructorID,RowVersion")] Department depaato)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Departments.Update(depaato);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(depaato);
+        }
     }
 }

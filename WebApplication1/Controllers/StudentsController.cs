@@ -101,7 +101,7 @@ namespace WebApplication1.Controllers
             return View(student);
         }
 
-        //delete POST method, teostab muudatusi
+        //delete POST method, teostab muudatusi, 𝓯𝓻𝓮𝓪𝓴𝔂 delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -130,7 +130,25 @@ namespace WebApplication1.Controllers
             return View(student);
         }
 
-        //EDIT!!!!!!!!!!
+        //EDIT GET!!!!!!!!!!
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var student = await _context.Students.FirstOrDefaultAsync(m => m.ID == id);
+
+            if (student == null)
+            {
+                return NotFound();
+            }
+            return View();
+        }
+        //𝓯𝓻𝓮𝓪𝓴𝔂 EDIT!!
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind("ID, LastName, FirstMidName, EnrollmentDate")] Student student)
         {
             if (ModelState.IsValid)
