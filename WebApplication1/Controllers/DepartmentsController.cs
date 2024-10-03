@@ -108,11 +108,13 @@ namespace WebApplication1.Controllers
             }
             return View();
         }
-        //𝓯𝓻𝓮𝓪𝓴𝔂 edit
+        //𝓯𝓻𝓮𝓪𝓴𝔂 edit, why is you not working?
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind("Name,Budget,StartDate,TotalMoneyLaundered,TotalBodyCount,InstructorID,RowVersion")] Department depaato)
         {
+            ModelState.Remove("RowVersion");
+            ModelState.Remove("Courses");
             if (ModelState.IsValid)
             {
                 _context.Departments.Update(depaato);
