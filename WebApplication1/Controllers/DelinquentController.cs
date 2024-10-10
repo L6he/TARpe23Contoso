@@ -38,7 +38,7 @@ namespace WebApplication1.Controllers
             ViewData["RecentViolation"] = new SelectList(_context.Delinquents);
             return View(delinquent);
         }
-
+        /*
         public async Task<IActionResult> Details(int id)
         {
             string query = "SELECT * FROM Delinquents WHERE ID = {0}";
@@ -51,7 +51,7 @@ namespace WebApplication1.Controllers
             }
 
             return View(delinquent);
-        }
+        }*/
 
         //Edit GET method that is suspiciously similar to the teacher's edit get method
         [HttpGet]
