@@ -78,11 +78,11 @@ namespace WebApplication1.Controllers
               .FirstOrDefaultAsync(m => m.ID == id);
             if (sonoChiNoSadame == null)
             {
-                Delinquent delinquentIsDeleted = new();
-                await TryUpdateModelAsync(delinquentIsDeleted);
+                //Delinquent delinquentIsDeleted = new();
+                //await TryUpdateModelAsync(delinquentIsDeleted);
                 ModelState.AddModelError(string.Empty, "JOOOOOOOOOOOOOOOOOOOOJOOO");
                 ViewData["RecentViolation"] = new SelectList(_context.Delinquents);
-                return View(delinquentIsDeleted);
+                //return View(delinquentIsDeleted);
             }
 
             var tryUpdate = await TryUpdateModelAsync<Delinquent>(sonoChiNoSadame, "",
@@ -122,7 +122,7 @@ namespace WebApplication1.Controllers
                         }
                         if (databaseValues.RecentViolation != clientValues.RecentViolation)
                         {
-                            Delinquent databaseHasThisViolation = await _context.Delinquents.FirstOrDefaultAsync(i => i.ID == databaseValues.RecentViolation);
+                            //Delinquent databaseHasThisViolation = await _context.Delinquents.FirstOrDefaultAsync(i => i.ID == databaseValues.RecentViolation);
                             ModelState.AddModelError("Name", $"Current Value: {databaseValues.RecentViolation}");
                         }
                         ModelState.AddModelError(string.Empty, "star platinum" + "the world" + "time has stopped");
