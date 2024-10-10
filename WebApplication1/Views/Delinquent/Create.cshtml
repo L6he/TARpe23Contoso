@@ -1,0 +1,44 @@
+﻿@model WebApplication1.Models.Delinquent
+
+@{
+    ViewData["Title"] = "Add New";
+}
+
+<h1>Add new</h1>
+
+<h4>Delinquent</h4>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="control-label">
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstMidName" class="control-label"></label>
+                <input asp-for="FirstMidName" class="control-label">
+                <span asp-validation-for="FirstMidName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecentViolation" class="control-label"></label>
+                <select asp-for="RecentViolation" class="form-control" asp-items="@Html.GetEnumSelectList<Violation>()">
+                    <option value="">-- Select Violation --</option>
+                </select>
+                <span asp-validation-for="RecentViolation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn-outline-secondary">Discard changes</a>
+</div>
