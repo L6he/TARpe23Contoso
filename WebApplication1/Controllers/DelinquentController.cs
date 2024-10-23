@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
+using WebApplication1.Migrations;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -38,22 +39,22 @@ namespace WebApplication1.Controllers
             ViewData["RecentViolation"] = new SelectList(_context.Delinquents);
             return View(delinquent);
         }
-        /*
+        
         public async Task<IActionResult> Details(int id)
         {
-            string query = "SELECT * FROM Delinquents WHERE ID = {0}";
-            var delinquent = await _context.Delinquents.FromSqlRaw(query, id)
-                .AsNoTracking().FirstOrDefaultAsync();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var delinquent = await _context.Delinquents.FirstOrDefaultAsync(m => m.ID == id);
 
             if (delinquent == null)
             {
                 return NotFound();
             }
-
             return View(delinquent);
-        }*/
+        }
 
-        //Edit GET method that is suspiciously similar to the teacher's edit get method
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -72,66 +73,63 @@ namespace WebApplication1.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit([Bind("ID,LastName,FirstMidName,RecentViolation")] Delinquent delinquent)
         {
-            var sonoChiNoSadame = await _context.Delinquents
-              .FirstOrDefaultAsync(m => m.ID == id);
-            if (sonoChiNoSadame == null)
+            if (ModelState.IsValid)
             {
-                //Delinquent delinquentIsDeleted = new();
-                //await TryUpdateModelAsync(delinquentIsDeleted);
-                ModelState.AddModelError(string.Empty, "JOOOOOOOOOOOOOOOOOOOOJOOO");
-                ViewData["RecentViolation"] = new SelectList(_context.Delinquents);
-                //return View(delinquentIsDeleted);
-            }
-
-            var tryUpdate = await TryUpdateModelAsync<Delinquent>(sonoChiNoSadame, "",
-                s => s.LastName,
-                s => s.FirstMidName,
-                s => s.RecentViolation
-                );
-
-            if (tryUpdate)
-            {
-                try
-                {
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction("Index");
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    var exceptionEntry = ex.Entries.Single();
-                    var clientValues = (Delinquent)exceptionEntry.Entity;
-                    var databaseEntry = exceptionEntry.GetDatabaseValues();
-
-                    if (databaseEntry == null)
-                    {
-                        ModelState.AddModelError(string.Empty, "faitiin gooorud");
-                    }
-                    else
-                    {
-                        var databaseValues = (Delinquent)databaseEntry.ToObject();
-
-                        if (databaseValues.LastName != clientValues.LastName)
-                        {
-                            ModelState.AddModelError("LastName", $"Current value: {databaseValues.LastName}");
-                        }
-                        if (databaseValues.FirstMidName != clientValues.FirstMidName)
-                        {
-                            ModelState.AddModelError("FirstMidName", $"Current value: {databaseValues.FirstMidName}");
-                        }
-                        if (databaseValues.RecentViolation != clientValues.RecentViolation)
-                        {
-                            //Delinquent databaseHasThisViolation = await _context.Delinquents.FirstOrDefaultAsync(i => i.ID == databaseValues.RecentViolation);
-                            ModelState.AddModelError("Name", $"Current Value: {databaseValues.RecentViolation}");
-                        }
-                        ModelState.AddModelError(string.Empty, "star platinum" + "the world" + "time has stopped");
-                        ModelState.Remove("RowVersion");
-                    }
-                }
+                _context.Delinquents.Update(delinquent);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
             ViewData["RecentViolation"] = new SelectList(_context.Delinquents);
-            return View(sonoChiNoSadame);
+            return View(delinquent);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var delinquent = await _context.Delinquents.FirstOrDefaultAsync(x => x.ID == id);
+
+            if (delinquent == null)
+            {
+                return NotFound();
+            }
+            return View(delinquent);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var delinquent = await _context.Delinquents.FindAsync(id);
+
+            _context.Delinquents.Remove(delinquent);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Honor(int id)
+        {
+            if (id == null) { return NotFound(); }
+            if (ModelState.IsValid)
+            {
+                
+                var delinquentToChange = await _context.Delinquents.FirstOrDefaultAsync(d => d.ID == id);
+                delinquentToChange.RecentViolation = Violation.Clean;
+                _context.Delinquents.Update(delinquentToChange);
+                await _context.SaveChangesAsync();
+                return View(delinquentToChange);
+            }
+            return RedirectToAction("Index");
         }
     }
 }

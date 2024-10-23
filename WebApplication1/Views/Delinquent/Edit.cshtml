@@ -1,0 +1,39 @@
+﻿@model WebApplication1.Models.Delinquent
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit info</h1>
+
+<h4>New delinquent info</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="ID" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstMidName" class="control-label"></label>
+                <input asp-for="FirstMidName" class="form-control" />
+                <span asp-validation-for="FirstMidName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecentViolation" class="control-label"></label>
+                <select asp-for="RecentViolation" class="form-control" asp-items="@Html.GetEnumSelectList<Violation>()">
+                    <option value="">-- Select Violation --</option>
+                </select>
+                <span asp-validation-for="RecentViolation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Make changes" class="btn btn-info" /> | <a asp-action="Index" class="btn btn-outline-secondary">Discard changes</a>
+            </div>
+        </form>
+    </div>
+</div>

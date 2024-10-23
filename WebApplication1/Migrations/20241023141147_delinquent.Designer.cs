@@ -12,8 +12,8 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20240927070118_DeleteDepartment")]
-    partial class DeleteDepartment
+    [Migration("20241023141147_delinquent")]
+    partial class delinquent
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,30 @@ namespace WebApplication1.Migrations
                     b.HasIndex("InstructorID");
 
                     b.ToTable("CourseAssignments", (string)null);
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Delinquent", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("FirstMidName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RecentViolation")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Delinquents", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Department", b =>
