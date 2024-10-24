@@ -115,6 +115,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
+        /*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Honor(int id)
@@ -122,7 +123,6 @@ namespace WebApplication1.Controllers
             if (id == null) { return NotFound(); }
             if (ModelState.IsValid)
             {
-                
                 var delinquentToChange = await _context.Delinquents.FirstOrDefaultAsync(d => d.ID == id);
                 delinquentToChange.RecentViolation = Violation.Clean;
                 _context.Delinquents.Update(delinquentToChange);
@@ -130,6 +130,64 @@ namespace WebApplication1.Controllers
                 return View(delinquentToChange);
             }
             return RedirectToAction("Index");
+        }*/
+
+        [HttpGet]
+        public async Task<IActionResult> Clone(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var delinquent = await _context.Delinquents.FirstOrDefaultAsync(x => x.ID == id);
+
+            if (delinquent == null)
+            {
+                return NotFound();
+            }
+            return View(delinquent);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Clone(int id)
+        {
+            
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var delinquent = await _context.Delinquents.FirstOrDefaultAsync(m => m.ID == id);
+
+            var clonedDelinquent = new Delinquent
+            {
+                LastName = delinquent.LastName,
+                FirstMidName = delinquent.FirstMidName,
+                RecentViolation = delinquent.RecentViolation
+            };
+
+            if (delinquent == null)
+            {
+                return NotFound();
+            }
+
+            if (clonedDelinquent != null)
+            {
+                _context.Delinquents.Add(clonedDelinquent);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index");
+           /*
+            var delinquent = await _context.Delinquents.FindAsync(id);
+
+            _context.Delinquents.Add(delinquent);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index"); 
+            */
         }
     }
 }

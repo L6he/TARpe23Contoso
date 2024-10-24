@@ -119,9 +119,9 @@ namespace WebApplication1.Data
                 return;
             }
             var delinquents = new Delinquent[] {
-                new Delinquent { FirstMidName = "Adam", LastName = "Belušić", RecentViolation = Violation.Expelled },
-                new Delinquent { FirstMidName = "Vanja", LastName = "Vajnšenker", RecentViolation = Violation.Suspended },
-                new Delinquent { FirstMidName = "Jason", LastName = "Angove", RecentViolation = Violation.Nerdy },
+                new Delinquent { LastName = "Belušić", FirstMidName = "Adam", RecentViolation = Violation.Expelled },
+                new Delinquent { LastName = "Vajnšenker", FirstMidName = "Vanja", RecentViolation = Violation.Suspended },
+                new Delinquent { LastName = "Angove", FirstMidName = "Jason", RecentViolation = Violation.Nerdy },
                 };
             context.Delinquents.AddRange(delinquents);
             context.SaveChanges(); 
