@@ -192,6 +192,41 @@ namespace WebApplication1.Controllers
             ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FullName", sonoChiNoSadame.InstructorID);
             return View(sonoChiNoSadame);
         }
+
+        public async Task<IActionResult> Clone(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var depaato = await _context.Departments.FirstOrDefaultAsync(m => m.DepartmentID == id);
+
+            var clonedDepartment = new Department
+            {
+                Name = depaato.Name,
+                Budget = depaato.Budget,
+                StartDate = depaato.StartDate,
+                TotalMoneyLaundered = depaato.TotalMoneyLaundered,
+                TotalBodyCount = depaato.TotalBodyCount,
+                InstructorID = depaato.InstructorID,
+                RowVersion = depaato.RowVersion,
+                Administrator = depaato.Administrator,
+                Courses = depaato.Courses,
+            };
+
+            if (depaato == null)
+            {
+                return NotFound();
+            }
+
+            if (clonedDepartment != null)
+            {
+                _context.Departments.Add(clonedDepartment);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index");
+        }
         /*
         //Edit GET
         [HttpGet]
