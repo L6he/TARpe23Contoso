@@ -113,6 +113,19 @@ namespace WebApplication1.Data
             }; 
             context.Departments.AddRange(departments);
             context.SaveChanges();
+
+            if (context.Delinquents.Any())
+            {
+                return;
+            }
+            var delinquents = new Delinquent[] {
+                new Delinquent { FirstMidName = "Adam", LastName = "Belušić", RecentViolation = Violation.Expelled },
+                new Delinquent { FirstMidName = "Vanja", LastName = "Vajnšenker", RecentViolation = Violation.Suspended },
+                new Delinquent { FirstMidName = "Jason", LastName = "Angove", RecentViolation = Violation.Nerdy },
+                };
+            context.Delinquents.AddRange(delinquents);
+            context.SaveChanges(); 
+
             /*
             //objekt õpilastega, mis lisatakse siis, kui õpilasi sisestatud ei ole
             var students = new Student[]
